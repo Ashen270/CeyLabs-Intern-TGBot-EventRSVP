@@ -1,4 +1,4 @@
-const { insertUser } = require('./database');
+import { insertUser } from './database';
 
 const registerUser = (bot, chatId) => {
     bot.sendMessage(chatId, "Please enter your name:");
@@ -35,6 +35,6 @@ const registerUser = (bot, chatId) => {
     });
 };
 
-module.exports = {
+export default {
     registerUser
 };

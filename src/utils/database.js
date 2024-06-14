@@ -24,7 +24,7 @@ const insertUser = (name, email, tickets, userId, callback) => {
     });
 };
 
-module.exports = {
+export default {
     db,
     insertUser
 };

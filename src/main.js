@@ -1,7 +1,8 @@
-const TelegramBot = require('node-telegram-bot-api');
-const { getEventInfo } = require('./utils/event_info');
-const { registerUser } = require('./utils/registration');
-const config = require('./config');
+import TelegramBot from 'node-telegram-bot-api';
+import { getEventInfo } from './utils/event_info';
+import { registerUser } from './utils/registration';
+import config from './config.json';
+
 const TOKEN = config.token;
 const bot = new TelegramBot(TOKEN, { polling: true });
 const groupId = config.groupId;
@@ -15,7 +16,7 @@ bot.onText(/\/start/, (msg) => {
 // Register command
 bot.onText(/\/register/, (msg) => {
     const chatId = msg.chat.id;
-    registerUser(bot, chatId);
+    registerUser(bot, chatId, groupId);
 });
 
 // Help command

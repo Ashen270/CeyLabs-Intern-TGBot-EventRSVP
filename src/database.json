@@ -1,5 +1,4 @@
 {
-    "users": [],
-    "events": [],
-    "invitations": []
+    "database": "./database/event_bot.db"
 }
+  

@@ -1,4 +1,3 @@
-
 {
     "name": "ceylabs-intern-tgbot-eventrsvp",
     "version": "1.0.0",
@@ -9,13 +8,19 @@
         "test": "mocha tests/test_main.js"
     },
     "dependencies": {
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "node-telegram-bot-api": "^0.66.0",
+        "sqlite3": "^5.1.7"
     },
     "devDependencies": {
-        "mocha": "^8.3.2",
         "chai": "^4.3.4",
+        "mocha": "^8.3.2",
         "supertest": "^6.1.3"
     },
     "author": "CeyLabs",
-    "license": "ISC"
+    "license": "ISC",
+    "directories": {
+        "test": "tests"
+    },
+    "keywords": []
 }

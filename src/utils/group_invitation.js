@@ -11,6 +11,6 @@ const addUserToGroup = (bot, chatId, userId, groupId) => {
     });
 };
 
-module.exports = {
+export default {
     addUserToGroup
 };
