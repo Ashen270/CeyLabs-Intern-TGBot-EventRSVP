@@ -1,19 +1,21 @@
+
 {
-  "name": "ceylabs-intern-tgbot-eventrsvp",
-  "version": "1.0.0",
-  "description": "Develop a Telegram bot for event ticketing that allows users to obtain free tickets and adds them to a single Telegram group dedicated to the event.",
-  "main": "main.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "run main.js",
-    "start": "node src/main.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axois": "^0.0.1-security",
-    "express": "^4.19.2"
-  }
+    "name": "ceylabs-intern-tgbot-eventrsvp",
+    "version": "1.0.0",
+    "description": "Develop a Telegram bot for event ticketing that allows users to obtain free tickets and adds them to a single Telegram group dedicated to the event.",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "node src/main.js",
+        "test": "mocha tests/test_main.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "mocha": "^8.3.2",
+        "chai": "^4.3.4",
+        "supertest": "^6.1.3"
+    },
+    "author": "CeyLabs",
+    "license": "ISC"
 }
