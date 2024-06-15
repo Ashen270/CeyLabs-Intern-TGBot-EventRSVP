@@ -8,8 +8,6 @@ SQLite3
 ## For run the Project
 In Fork or Clone The GitHub Repository  
 
- git clone https://github.com/your-username/ceylabs-intern-tgbot-eventrsvp.git
-
  cd ceylabs-intern-tgbot-eventrsvp
 
 ## Install Dependencies
