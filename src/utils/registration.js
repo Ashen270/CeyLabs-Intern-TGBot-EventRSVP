@@ -1,6 +1,6 @@
-import { insertUser } from './database';
+import { insertUser } from './database.js';
 
-const registerUser = (bot, chatId) => {
+const registerUser = (bot, chatId, groupId) => {
     bot.sendMessage(chatId, "Please enter your name:");
     bot.once('message', (msg) => {
         const name = msg.text;
@@ -35,6 +35,4 @@ const registerUser = (bot, chatId) => {
     });
 };
 
-export default {
-    registerUser
-};
+export { registerUser };

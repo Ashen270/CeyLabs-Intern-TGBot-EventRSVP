@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Develop a Telegram bot for event ticketing that allows users to obtain free tickets and adds them to a single Telegram group dedicated to the event.",
     "main": "src/main.js",
+    "type": "module",
     "scripts": {
         "start": "node src/main.js",
         "test": "mocha tests/test_main.js"

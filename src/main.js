@@ -1,7 +1,8 @@
 import TelegramBot from 'node-telegram-bot-api';
-import { getEventInfo } from './utils/event_info';
-import { registerUser } from './utils/registration';
-import config from './config.json';
+import { getEventInfo } from './utils/event_info.js';
+import { registerUser } from './utils/registration.js';
+import config from './config.json'assert { type: "json" };
+
 
 const TOKEN = config.token;
 const bot = new TelegramBot(TOKEN, { polling: true });
@@ -10,7 +11,9 @@ const groupId = config.groupId;
 // Start command
 bot.onText(/\/start/, (msg) => {
     const eventInfo = getEventInfo();
-    bot.sendMessage(msg.chat.id, eventInfo);
+    bot.sendPhoto(msg.chat.id, eventInfo.imageUrl);
+    bot.sendMessage(msg.chat.id, eventInfo.text);
+    
 });
 
 // Register command

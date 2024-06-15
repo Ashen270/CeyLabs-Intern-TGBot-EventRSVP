@@ -1,5 +1,5 @@
 // Example test code for your bot
-const assert = require('assert');
+import assert from 'assert';
 
 describe('Telegram Bot', () => {
     it('should return event info on /start', () => {
