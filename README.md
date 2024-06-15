@@ -21,19 +21,28 @@ npm install
 npm run bot
 
 
-#### Code Overview
+# Code Overview
 
-# src/main.js
+## src/main.js
 Main entry point of the bot. Sets up the commands and handles user interactions.
 
-# src/utils/event_info.js
+## src/utils/event_info.js
 Contains the getEventInfo function, which returns event details and an image URL.
 
-# src/utils/registration.js
+## src/utils/registration.js
 Handles the registration process for users, interacting with the SQLite database to store user information.
 
 # src/utils/database.js
 Contains the database setup and the insertUser function to insert user data into the SQLite database.
 
+
+
+## Telegram Bot Username
+
+@Yathawatharana_Bot
+
+## Telegram Group
+
+https://t.me/+j6pQ17jTzDcyZDU1
 
 
