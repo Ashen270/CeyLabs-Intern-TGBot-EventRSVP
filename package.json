@@ -5,7 +5,7 @@
     "main": "src/main.js",
     "type": "module",
     "scripts": {
-        "start": "node src/main.js",
+        "bot": "node src/main.js",
         "test": "mocha tests/test_main.js"
     },
     "dependencies": {
