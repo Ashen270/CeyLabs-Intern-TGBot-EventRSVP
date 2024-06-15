@@ -1,73 +1,61 @@
 import { insertUser } from './database.js';
-const userStates = {};
+
 /**
- * Function to handle the user registration process.
- * @param {TelegramBot} bot The Telegram bot instance.
- * @param {number} chatId The chat ID of the user.
- * @param {number} groupId The ID of the group to which users are being registered.
+ * @param {TelegramBot} bot - The instance of the Telegram bot
+ * @param {number} chatId - The ID of the chat 
+ * @param {number} groupId - The ID of the Telegram group
  */
 const registerUser = (bot, chatId, groupId) => {
-    // Initialize the user's state
-    userStates[chatId] = { step: 'name' };
+    // get user name
     bot.sendMessage(chatId, "Please enter your name:");
-    // Listen for incoming messages
-    const messageHandler = (msg) => {
-        // Ensure the message is from the same chat
-        if (msg.chat.id !== chatId) return;
-        const userState = userStates[chatId];
-        if (!userState) return;
-        switch (userState.step) {
-            case 'name':
-                userState.name = msg.text;
-                userState.step = 'email';
-                bot.sendMessage(chatId, "Please enter your email:");
-                break;
+    
+    //  Listen for the user's response containing their name
+    bot.once('message', (msg) => {
+        const name = msg.text;
 
-            case 'email':
-                userState.email = msg.text;
-                userState.step = 'tickets';
-                bot.sendMessage(chatId, "How many tickets would you like?");
-                break;
+        //get user for their email.
+        bot.sendMessage(chatId, "Please enter your email:");
+        
+        //Listen for the user's response containing their email.
+        bot.once('message', (msg) => {
+            const email = msg.text;
 
-            case 'tickets':
-                userState.tickets = parseInt(msg.text);
-                userState.userId = msg.from.id;
+            //Ask the user how many tickets they would like.
+            bot.sendMessage(chatId, "How many tickets would you like?");
+            
+           
+            bot.once('message', (msg) => {
+                const tickets = parseInt(msg.text);
+                const userId = msg.from.id;
 
-                // Insert the user into the database
-                insertUser(userState.name, userState.email, userState.tickets, userState.userId, (err, ticketId) => {
+                //Insert the user registration information 
+                insertUser(name, email, tickets, userId, (err, ticketId) => {
                     if (err) {
+                        //Handle any errors that occur during the insertion.
                         bot.sendMessage(chatId, "There was an error processing your request. Please try again.");
-                        // Clear state on error
-                        delete userStates[chatId];
                         return;
                     }
 
-                    // Send a confirmation message to the user
-                    bot.sendMessage(chatId, `Greetings ${userState.name}! You have successfully requested ${userState.tickets} ticket(s). Your ticket ID is ${ticketId}.`);
+                    //Confirm the user's registration 
+                    bot.sendMessage(chatId, `Thank you ${name}! You have successfully requested ${tickets} ticket(s). Your ticket ID is ${ticketId}.`);
 
-                    // Check if the user is already a member of the group
-                    bot.getChatMember(groupId, userState.userId).then((member) => {
+                    //Check if the user is already a member of the event group
+                    bot.getChatMember(groupId, userId).then((member) => {
                         if (member.status === 'left' || member.status === 'kicked') {
+                            //If user is not in the group, send an invite link
                             bot.sendMessage(chatId, "Adding you to the event group...");
                             bot.exportChatInviteLink(groupId).then((inviteLink) => {
                                 bot.sendMessage(chatId, `Join the event group here: ${inviteLink}`);
                             });
                         } else {
+                            //If  user is already in the group 
                             bot.sendMessage(chatId, "You are already a member of the event group.");
                         }
-                    }).finally(() => {
-                        delete userStates[chatId];
                     });
                 });
-                break;
-            default:
-                bot.sendMessage(chatId, "There was an error processing your request. Please try again.");
-                delete userStates[chatId];
-                break;
-        }
-    };
-    bot.on('message', messageHandler);
-    userStates[chatId].cleanup = () => bot.removeListener('message', messageHandler);
+            });
+        });
+    });
 };
 
 export { registerUser };
