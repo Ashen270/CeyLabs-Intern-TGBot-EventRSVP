@@ -8,22 +8,22 @@ import { insertUser } from './database.js';
 const registerUser = (bot, chatId, groupId) => {
     // get user name
     bot.sendMessage(chatId, "Please enter your name:");
-    
+
     //  Listen for the user's response containing their name
     bot.once('message', (msg) => {
         const name = msg.text;
 
         //get user for their email.
         bot.sendMessage(chatId, "Please enter your email:");
-        
+
         //Listen for the user's response containing their email.
         bot.once('message', (msg) => {
             const email = msg.text;
 
             //Ask the user how many tickets they would like.
             bot.sendMessage(chatId, "How many tickets would you like?");
-            
-           
+
+
             bot.once('message', (msg) => {
                 const tickets = parseInt(msg.text);
                 const userId = msg.from.id;
